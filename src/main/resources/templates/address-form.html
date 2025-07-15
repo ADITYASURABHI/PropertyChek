@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Address Input</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1560185127-6ed189bf02f4');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: #2ecc71;
+            padding: 20px;
+            color: white;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            margin-top: 100px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .submitted-address {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<header>theGuarantors</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+</nav>
+
+<div class="form-container">
+    <h2>Enter an Address</h2>
+    <form action="/submit-address" method="post">
+        <input type="text" name="address" placeholder="Enter address" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="submitted-address" th:if="${submittedAddress}">
+        <p>You submitted: <b th:text="${submittedAddress}"></b></p>
+    </div>
+</div>
+</body>
+</html>
