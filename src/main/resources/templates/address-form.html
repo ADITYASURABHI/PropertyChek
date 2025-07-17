@@ -85,21 +85,56 @@
 <header>theGuarantors</header>
 
 <nav>
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
+    <a href="/form">Home</a>
+    <a href="/form">Login</a>
 </nav>
 
 <div class="form-container">
     <h2>Enter an Address</h2>
-    <form action="/submit-address" method="post">
-        <input type="text" name="address" placeholder="Enter address" required>
-        <br>
+    <form id="addressForm">
+        <input type="text" id="addressInput" placeholder="Enter address" required />
         <button type="submit">Submit</button>
     </form>
-
-    <div class="submitted-address" th:if="${submittedAddress}">
-        <p>You submitted: <b th:text="${submittedAddress}"></b></p>
-    </div>
+    <div id="result" style="display: none;"></div>
 </div>
+
+<script>
+document.getElementById("addressForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const address = document.getElementById("addressInput").value;
+    const resultDiv = document.getElementById("result");
+
+    fetch("/validate-address", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inputAddress: address })
+    })
+    .then(res => res.json())
+    .then(data => {
+        resultDiv.style.display = "block";
+
+        if (data.status === "unverifiable") {
+            resultDiv.innerHTML = `<p style="color:red;">${data.message}</p>`;
+        } else {
+            const statusColor = data.status === "corrected" ? "orange" : "green";
+            const label = data.status === "corrected" ? "Corrected Address" : "Verified Address";
+
+            resultDiv.innerHTML = `
+                <h3 style="color:${statusColor};">${label}</h3>
+                <p><strong>Street:</strong> ${data.street || '-'}</p>
+                <p><strong>City:</strong> ${data.city || '-'}</p>
+                <p><strong>State:</strong> ${data.state || '-'}</p>
+                <p><strong>Zip Code:</strong> ${data.zipCode || '-'}</p>
+                ${data.message ? `<p style="color:${statusColor};"><em>${data.message}</em></p>` : ''}
+            `;
+        }
+    })
+    .catch(() => {
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `<p style="color:red;">An unexpected error occurred. Please try again.</p>`;
+    });
+});
+</script>
 </body>
 </html>
