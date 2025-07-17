@@ -1,1 +1,1 @@
-# PropertyChek
+# PropertyCheck
