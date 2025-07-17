@@ -1,4 +1,4 @@
-package guarantorsproject.com.example.project.model;
+package guarantorsproject.com.codingassessment.validateaddress.model;
 
 public class AddressRequest {
     private String inputAddress;

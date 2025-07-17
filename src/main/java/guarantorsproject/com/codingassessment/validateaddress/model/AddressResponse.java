@@ -1,4 +1,4 @@
-package guarantorsproject.com.example.project.model;
+package guarantorsproject.com.codingassessment.validateaddress.model;
 
 public class AddressResponse {
     private String street;
@@ -7,6 +7,7 @@ public class AddressResponse {
     private String state;
     private String zipCode;
     private String status;
+    private String message;
 
     // Getters and Setters
     public String getStreet() { return street; }
@@ -26,4 +27,7 @@ public class AddressResponse {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }
