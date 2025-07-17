@@ -88,5 +88,8 @@ Why Census API was selected ?
 - Optional switch to Google API for advanced use
 - Add front-end address autocomplete (optional)
 
+UI
+<img width="1882" height="776" alt="image" src="https://github.com/user-attachments/assets/c9a9d0f8-02d6-4edf-8172-3956b6280cab" />
+
 🙋‍♀️ Author
 Aditya Surabhi
